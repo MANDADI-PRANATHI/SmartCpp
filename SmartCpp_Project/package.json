@@ -1,0 +1,78 @@
+{
+  "name": "smartcpp-analyzer",
+  "displayName": "SmartCpp Analyzer",
+  "description": "none",
+  "publisher": "smartCpp",
+  "type": "commonjs",
+  "version": "0.0.2",
+  "engines": {
+    "vscode": "^1.98.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters"
+  ],
+  "activationEvents": [
+    "onLanguage:cpp",
+    "onCommand:extension.showDependencyGraph",
+    "onCommand:snippetTagger.saveSnippet",
+  "onCommand:snippetTagger.insertSnippet"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.analyzeCode",
+        "title": "Analyze C++ Code"
+      },
+      {
+        "command": "extension.showDependencyGraph",
+        "title": "Show Dependency Graph"
+      },
+      {
+        "command": "snippetTagger.showSnippetQuickPick",
+        "title": "Show Snippet Actions",
+        "category": "Snippet Tagger"
+      }
+    ],
+    "configuration": {
+      "title": "C++ Error Analyzer",
+      "properties": {
+        "cppErrorAnalyzer.togetherApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your Together AI API key ",
+          "scope": "application"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile ",
+    "clean": "rm -rf out",
+    "compile": "tsc -p ./ &&  copy src\\fixedcode.js out\\fixedcode.js",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile ",
+    "lint": "eslint src --ext .ts,.tsx",
+    "test": "vscode-test",
+    "debug": "npx vscode-debugadapter"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^20.17.30",
+    "@types/vscode": "^1.98.0",
+    "@typescript-eslint/eslint-plugin": "^8.25.0",
+    "@typescript-eslint/parser": "^8.25.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "cpy-cli": "^5.0.0",
+    "eslint": "^9.21.0",
+    "typescript": "^5.8.2",
+    "vscode": "^1.1.37"
+  },
+  "dependencies": {
+    "axios": "^1.8.4",
+    "dotenv": "^16.4.7",
+    "node-fetch": "^3.3.2"
+  }
+}
